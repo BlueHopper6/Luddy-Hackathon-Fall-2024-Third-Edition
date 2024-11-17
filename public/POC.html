@@ -8,35 +8,41 @@
     <!-- Link to CSS files -->
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="navBar.css">
+    <link rel="stylesheet" href="form.css">
 
 
     <style>
         /* Additional inline table styling (optional if not in styles.css) */
-        #contactsTable {
+        #contactsTable
+        {
             width: 90%;
             margin: 50px auto;
             border-collapse: collapse;
             color: #ffffff; /* White text for visibility */
         }
 
-        #contactsTable th, #contactsTable td {
+        #contactsTable th, #contactsTable td
+        {
             border: 1px solid #ffffff; /* White border lines */
             padding: 10px;
             text-align: left;
             font-size: 14px;
         }
 
-        #contactsTable th {
+        #contactsTable th
+        {
             background-color: #1e2631; /* Slightly darker background for header */
             font-weight: bold;
             text-transform: uppercase;
         }
 
-        #contactsTable tr:nth-child(even) {
+        #contactsTable tr:nth-child(even)
+        {
             background-color: #151a25; /* Alternate row background for contrast */
         }
 
-        #contactsTable tr:hover {
+        #contactsTable tr:hover
+        {
             background-color: #394355; /* Highlight row on hover */
         }
     </style>
@@ -56,6 +62,25 @@
     <div style="margin-top: -100px; text-align: center;">
         <h1>Points of Contact</h1>
     </div>
+
+    
+    <!-- Form to submit query -->
+    <div class="formContainerDiv">
+        <form id="pocQuery_form" onsubmit="submitQuery(event)">
+            <h2>Point of Contact Query</h2>
+            <div class="form-group">
+                <label for="productName">Product:</label>
+                <input type="text" id="productName_input" name="productName" placeholder="Product">
+            </div>
+            <div class="form-group">
+                <label for="repoName">Repository:</label>
+                <input type="text" id="repoName_input" name="repoName" placeholder="Repository">
+            </div>
+            <button type="submit" class="submitButton">Submit</button>
+        </form>
+    </div>
+    
+
 
     <!-- Points of Contact Table -->
     <div style="padding: 20px;">
@@ -78,10 +103,13 @@
         </table>
     </div>
 
+
     <script>
         // Function to fetch contacts from API and display in the table
-        async function fetchContacts() {
-            try {
+        async function fetchContacts()
+        {
+            try
+            {
                 const response = await fetch('http://localhost:3000/api/contacts'); // Update with your actual API URL
                 const contacts = await response.json();
 
@@ -105,13 +133,71 @@
                     `;
                     tableBody.appendChild(row);
                 });
-            } catch (error) {
+            }
+            catch(error)
+            {
                 console.error('Error fetching contacts:', error);
             }
         }
 
         // Fetch contacts when the page loads
-        window.onload = fetchContacts;
+        //window.onload = fetchContacts;
+    </script>
+
+
+    <script>
+        async function submitQuery(event)
+        {
+            event.preventDefault(); // Prevent form from refreshing the page
+
+            // Get form data
+            const product = document.getElementById('productName_input').value;
+            const repository = document.getElementById('repoName_input').value;
+
+            // Build the API URL with query parameters
+            const apiUrl = new URL('http://localhost:3000/api/query');
+            if (product) apiUrl.searchParams.append('product', product);
+            if (repository) apiUrl.searchParams.append('repository', repository);
+
+            try
+            {
+                // Fetch data from the API
+                const response = await fetch(apiUrl);
+                const data = await response.json();
+
+                // If no data is found, alert the user
+                if (response.status === 404 || data.length === 0)
+                {
+                    alert('No contacts found');
+                    return;
+                }
+
+                // Clear existing table rows before adding new ones
+                const tableBody = document.querySelector('#contactsTable tbody');
+                tableBody.innerHTML = ''; 
+
+                // Populate the table with the fetched data
+                data.forEach(contact => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${contact.poc_product}</td>
+                        <td>${contact.poc_repository}</td>
+                        <td>${contact.poc_firstName}</td>
+                        <td>${contact.poc_lastName}</td>
+                        <td>${contact.poc_email}</td>
+                        <td>${contact.poc_username}</td>
+                        <td>${contact.poc_location}</td>
+                        <td>${contact.poc_role}</td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            }
+            catch (error)
+            {
+                console.error('Error fetching contacts:', error);
+                alert('An error occurred while fetching contacts.');
+            }
+        }
     </script>
 </body>
 </html>

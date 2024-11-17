@@ -25,7 +25,7 @@ app.get('/', (req, res) => {
 });
   
 
-// API endpoint to get all contacts (for testing purposes)
+// API endpoint to get all contacts
 app.get('/api/contacts', async (req, res) => {
     try
     {
@@ -53,32 +53,48 @@ app.get('/api/contacts', async (req, res) => {
 app.get('/api/query', async (req, res) => {
     const { product, repository } = req.query;
 
-    try {
+    try
+    {
         // Build the query dynamically
-        let query = supabase.from('contacts').select('*');
+        let query = supabase.from('points_of_contact').select('*');
 
-        if (product) {
-            query = query.or(`product_name.ilike.%${product}%`);
-        }
+        // Apply the filter if either 'product' or 'repository' is present
+        if (product || repository)
+        {
+            const conditions = [];
 
-        if (repository) {
-            query = query.or(`repo_name.ilike.%${repository}%`);
+            if (product)
+            {
+                conditions.push(`poc_product.ilike.%${product}%`);
+            }
+
+            if (repository)
+            {
+                conditions.push(`poc_repository.ilike.%${repository}%`);
+            }
+
+            // Combine conditions using OR
+            query = query.or(conditions.join(','));
         }
 
         const { data, error } = await query;
 
-        if (error) {
+        if (error)
+        {
             return res.status(500).send({ error: error.message });
         }
 
         // If no data is found, return an empty array
-        if (data.length === 0) {
+        if (data.length === 0)
+        {
             return res.status(404).json({ message: 'No contacts found', data: [] });
         }
 
         // Return the data as JSON
         res.json(data);
-    } catch (err) {
+    }
+    catch(err)
+    {
         res.status(500).send({ error: 'Server error' });
     }
 });
