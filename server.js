@@ -16,6 +16,11 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 // Middlewares
 app.use(express.json());  // to parse JSON request bodies
 
+app.get('/', (req, res) => {
+    res.send('Hello, World!');
+});
+  
+
 // API endpoint to get all contacts (for testing purposes)
 app.get('/api/contacts', async (req, res) => {
     try

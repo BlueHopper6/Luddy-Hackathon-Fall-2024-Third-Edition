@@ -4,8 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
+
+    <!--getting css-->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="navBar.css">
+    <link rel="stylesheet" href="form.css">
+
 </head>
 <body>
-    
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <ul>
+            <li><a class="activeNavLink" href="index.html">Dashboard</a></li>
+            <li><a href="POC.html">POC</a></li>
+            <li><a href="documentation.html">Documentation</a></li>
+            <li><a href="about.html">About</a></li>
+        </ul>
+        <!--
+        <div class="search-form">
+            <input type="text" id="product_input" placeholder="Enter Product Name">
+            <input type="text" id="repository_input" placeholder="Enter Repository Name (optional)">
+            <button id="searchBtn">Search</button>
+        </div>
+        <div id="results"></div>
+        -->
+    </nav>
+
+
+    <!-- Point of Contact Form -->
+    <div class="formContainerDiv">
+        <form id="pocQuery_form">
+            <h2>Point of Contact Query</h2>
+            <div class="form-group">
+                <label for="productName">Product:</label>
+                <input type="text" id="productName_input" name="productName" placeholder="Product">
+            </div>
+            <div class="form-group">
+                <label for="repoName">Repository:</label>
+                <input type="text" id="repoName_input" name="repoName" placeholder="Repository">
+            </div>
+            <button type="submit" class="submitButton">Submit</button>
+        </form>
+    </div>
+
+    <script src="scripts.js"></script>
 </body>
 </html>

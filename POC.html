@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Points of Contact</title>
+
+    <!--getting css-->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="navBar.css">
+
+    <style>
+        table
+        {
+          width: 100%;
+          border-collapse: collapse;
+        }
+
+        table, th, td
+        {
+          border: 1px solid black;
+        }
+        th, td
+        {
+          padding: 10px;
+          text-align: left;
+        }
+      </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <ul>
+            <li><a href="index.html">Dashboard</a></li>
+            <li><a class="activeNavLink" href="POC.html">POC</a></li>
+            <li><a href="documentation.html">Documentation</a></li>
+            <li><a href="about.html">About</a></li>
+        </ul>
+        <!--
+        <div class="search-form">
+            <input type="text" id="product_input" placeholder="Enter Product Name">
+            <input type="text" id="repository_input" placeholder="Enter Repository Name (optional)">
+            <button id="searchBtn">Search</button>
+        </div>
+        <div id="results"></div>
+        -->
+    </nav>
+
+    <h1>Points of Contact</h1>
+    <table id="contactsTable">
+        <thead>
+            <tr>
+            <th>Product Name</th>
+            <th>Repository Name</th>
+            <th>Contact Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Table rows will be populated here -->
+        </tbody>
+    </table>
+
+    <script>
+    // Function to fetch contacts from API and display in the table
+    async function fetchContacts()
+    {
+        try
+        {
+            const response = await fetch('https://your-render-url.com/api/contacts');  // Update with your actual Render API URL
+            const contacts = await response.json();
+
+            const tableBody = document.querySelector('#contactsTable tbody');
+            tableBody.innerHTML = ''; // Clear existing table rows
+
+            // Loop through each contact and create a row in the table
+            contacts.forEach(contact => {
+                const row = document.createElement('tr');
+
+                // Create table cells for each contact attribute
+                const productCell = document.createElement('td');
+                productCell.textContent = contact.poc_product;  // Adjust with your column names
+                row.appendChild(productCell);
+
+                const repoCell = document.createElement('td');
+                repoCell.textContent = contact.poc_repository;  // Adjust with your column names
+                row.appendChild(repoCell);
+
+                const nameCell = document.createElement('td');
+                nameCell.textContent = contact.poc_contact_name;  // Adjust with your column names
+                row.appendChild(nameCell);
+
+                const emailCell = document.createElement('td');
+                emailCell.textContent = contact.poc_email;  // Adjust with your column names
+                row.appendChild(emailCell);
+
+                const phoneCell = document.createElement('td');
+                phoneCell.textContent = contact.poc_phone;  // Adjust with your column names
+                row.appendChild(phoneCell);
+
+                // Append the row to the table body
+                tableBody.appendChild(row);
+            });
+        }
+        catch(error)
+        {
+            console.error('Error fetching contacts:', error);
+        }
+    }
+        // Fetch contacts when the page loads
+        window.onload = fetchContacts;
+    </script>
+</body>
+</html>
