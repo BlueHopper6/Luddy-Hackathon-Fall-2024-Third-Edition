@@ -47,6 +47,42 @@ app.get('/api/contacts', async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 });
+
+
+// API endpoint to get contacts based on query
+app.get('/api/query', async (req, res) => {
+    const { product, repository } = req.query;
+
+    try {
+        // Build the query dynamically
+        let query = supabase.from('contacts').select('*');
+
+        if (product) {
+            query = query.or(`product_name.ilike.%${product}%`);
+        }
+
+        if (repository) {
+            query = query.or(`repo_name.ilike.%${repository}%`);
+        }
+
+        const { data, error } = await query;
+
+        if (error) {
+            return res.status(500).send({ error: error.message });
+        }
+
+        // If no data is found, return an empty array
+        if (data.length === 0) {
+            return res.status(404).json({ message: 'No contacts found', data: [] });
+        }
+
+        // Return the data as JSON
+        res.json(data);
+    } catch (err) {
+        res.status(500).send({ error: 'Server error' });
+    }
+});
+
   
 
 // Start the server
