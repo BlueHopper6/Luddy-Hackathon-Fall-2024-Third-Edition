@@ -10,6 +10,119 @@
     <link rel="stylesheet" href="navBar.css">
     <link rel="stylesheet" href="form.css">
 
+
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body Styling */
+        body {
+            font-family: 'Orbitron', sans-serif; /* Futuristic font */
+            background-color: #0a0f1c; /* Dark background */
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh;
+            padding-top: 100px; /* Space for the navbar */
+            text-align: center;
+            padding-bottom: 50px;
+        }
+
+        /* Content Styling */
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 30px;
+            width: 90%;
+            max-width: 1200px;
+            margin-top: 50px;
+        }
+
+        /* Card Styling */
+        .card {
+            background: linear-gradient(145deg, #1e2631, #0a0f1c); /* Futuristic gradient */
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.8), 0 0 12px rgba(0, 188, 212, 0.6); /* Glowing effect */
+            border: 1px solid #00bcd4; /* Neon border */
+            text-align: left;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h2 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: #00bcd4;
+        }
+
+        .card p {
+            font-size: 16px;
+            margin-bottom: 20px;
+            color: #c7cbd1;
+        }
+
+        .card a {
+            display: inline-block;
+            background-color: #00bcd4;
+            color: #fff;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            text-transform: uppercase;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .card a:hover {
+            background-color: #0099aa;
+        }
+
+        /* Media Query for Responsiveness */
+        @media (max-width: 768px) {
+            .content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .card h2 {
+                font-size: 20px;
+            }
+
+            .card p {
+                font-size: 14px;
+            }
+
+            .card a {
+                font-size: 14px;
+                padding: 10px 20px;
+            }
+        }
+    </style>
+
+    
 </head>
 <body>
     <!-- Navigation Bar -->
@@ -24,24 +137,34 @@
     </nav>
 
 
-    <!--
-    <div class="formContainerDiv">
-        <form id="pocQuery_form" action="" method="">
-            <h2>Point of Contact Query</h2>
-            <div class="form-group">
-                <label for="productName">Product:</label>
-                <input type="text" id="productName_input" name="productName" placeholder="Product">
-            </div>
-            <div class="form-group">
-                <label for="repoName">Repository:</label>
-                <input type="text" id="repoName_input" name="repoName" placeholder="Repository">
-            </div>
-            <button type="submit" class="submitButton">Submit</button>
-        </form>
+
+    <!-- Overview Section -->
+    <div class="header">
+        <h1>Overview of Pages</h1>
     </div>
-    
-    -->
-    <!-- Point of Contact Form -->
+
+    <div class="content">
+        <!-- POC Section -->
+        <div class="card">
+            <h2>POC (Proof of Concept)</h2>
+            <p>This page provides a query form to input data and see the results in a table format.</p>
+            <a href="POC.html" target="_blank">Go to POC</a>
+        </div>
+
+        <!-- Documentation Section -->
+        <div class="card">
+            <h2>API Documentation</h2>
+            <p>Here you'll find detailed information about the API, endpoints, and how to use them effectively.</p>
+            <a href="documentation.html" target="_blank">Go to Documentation</a>
+        </div>
+
+        <!-- Input Section -->
+        <div class="card">
+            <h2>Contact Input</h2>
+            <p>Use this page to input contact details based on the product or repository you're working on. It will be added to the database.</p>
+            <a href="insert.html" target="_blank">Go to Input Page</a>
+        </div>
+    </div>
 
     <script src="scripts.js"></script>
 </body>
