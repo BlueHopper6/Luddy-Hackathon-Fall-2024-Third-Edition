@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const dotenv = require('dotenv');
 const { createClient } = require('@supabase/supabase-js');
 
@@ -7,6 +8,9 @@ dotenv.config();
 
 // Initialize the Express app
 const app = express();
+
+// serve static files
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Initialize Supabase client
 const SUPABASE_URL = process.env.SUPABASE_URL;
