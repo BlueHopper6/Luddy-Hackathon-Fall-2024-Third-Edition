@@ -52,9 +52,12 @@
             <tr>
             <th>Product Name</th>
             <th>Repository Name</th>
-            <th>Contact Name</th>
+            <th>First Name</th>
+            <th>Last Name</th>
             <th>Email</th>
-            <th>Phone</th>
+            <th>Username</th>
+            <th>Location</th>
+            <th>Role</th>
             </tr>
         </thead>
         <tbody>
@@ -88,17 +91,29 @@
                 repoCell.textContent = contact.poc_repository;  // Adjust with your column names
                 row.appendChild(repoCell);
 
-                const nameCell = document.createElement('td');
-                nameCell.textContent = contact.poc_contact_name;  // Adjust with your column names
-                row.appendChild(nameCell);
+                const firstNameCell = document.createElement('td');
+                firstNameCell.textContent = contact.poc_firstName;  // Adjust with your column names
+                row.appendChild(firstNameCell);
+
+                const lastNameCell = document.createElement('td');
+                lastNameCell.textContent = contact.poc_lastName;  // Adjust with your column names
+                row.appendChild(lastNameCell);
 
                 const emailCell = document.createElement('td');
                 emailCell.textContent = contact.poc_email;  // Adjust with your column names
                 row.appendChild(emailCell);
 
-                const phoneCell = document.createElement('td');
-                phoneCell.textContent = contact.poc_phone;  // Adjust with your column names
-                row.appendChild(phoneCell);
+                const usernameCell = document.createElement('td');
+                usernameCell.textContent = contact.poc_username;  // Adjust with your column names
+                row.appendChild(usernameCell);
+
+                const locationCell = document.createElement('td');
+                locationCell.textContent = contact.poc_location;  // Adjust with your column names
+                row.appendChild(locationCell);
+                
+                const roleCell = document.createElement('td');
+                roleCell.textContent = contact.poc_role;  // Adjust with your column names
+                row.appendChild(roleCell);
 
                 // Append the row to the table body
                 tableBody.appendChild(row);
