@@ -25,6 +25,51 @@ app.get('/', (req, res) => {
 });
   
 
+// API endpoint to insert contact
+app.post('/api/insert', async (req, res) => {
+    const {
+        poc_product,
+        poc_repository,
+        poc_firstName,
+        poc_lastName,
+        poc_email,
+        poc_username,
+        poc_location,
+        poc_role,
+    } = req.body;
+    
+    try
+    {
+        // Insert the data into the Supabase table
+        const { data, error } = await supabase
+            .from('points_of_contact')
+            .insert([
+                {
+                    poc_product,
+                    poc_repository,
+                    poc_firstName,
+                    poc_lastName,
+                    poc_email,
+                    poc_username,
+                    poc_location,
+                    poc_role,
+                },
+            ]);
+
+        if (error)
+        {
+            return res.status(500).send({ error: error.message });
+        }
+
+        res.status(201).send({ message: 'Data inserted successfully', data });
+    }
+    catch(err)
+    {
+        res.status(500).send({ error: 'Server error' });
+    }
+});
+
+
 // API endpoint to get all contacts
 app.get('/api/contacts', async (req, res) => {
     try

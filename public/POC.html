@@ -13,13 +13,43 @@
 
     <style>
         /* Additional inline table styling (optional if not in styles.css) */
+        /*
         #contactsTable
         {
             width: 90%;
             margin: 50px auto;
             border-collapse: collapse;
-            color: #ffffff; /* White text for visibility */
+            color: #ffffff; /* White text for visibility *
+            margin-top: 250px;
+            left: 200px;
+
+            max-height: 600px; /* Limit the table height *
+            overflow-y: auto;
+            display: block; /* Required for the scroll effect *
         }
+
+        */
+
+        #contactsTable {
+            width: 90%;
+            margin: 50px auto;
+            border-collapse: collapse;
+            color: #ffffff; /* White text for visibility */
+            max-height: 600px; /* Limit the table height */
+            overflow-y: auto;
+            display: block; /* Required for the scroll effect */
+            margin-top: 20px; /* Ensure it is spaced properly after the form */
+        }
+
+        #contactsTable {
+            width: 90%;
+            margin: 50px auto;
+            border-collapse: collapse;
+            color: #ffffff;
+            max-height: 600px;
+            overflow-y: scroll;  /* Enable scrolling */
+        }
+
 
         #contactsTable th, #contactsTable td
         {
@@ -45,6 +75,12 @@
         {
             background-color: #394355; /* Highlight row on hover */
         }
+
+        body
+        {
+            text-align: center;
+            justify-content: center;
+        }
     </style>
 </head>
 <body>
@@ -53,6 +89,7 @@
         <ul>
             <li><a href="index.html">Dashboard</a></li>
             <li><a class="activeNavLink" href="POC.html">POC</a></li>
+            <li><a href="insert.html">Insert Data</a></li>
             <li><a href="documentation.html">Documentation</a></li>
             <li><a href="about.html">About</a></li>
         </ul>
@@ -66,7 +103,7 @@
     
     <!-- Form to submit query -->
     <div class="formContainerDiv">
-        <form id="pocQuery_form" onsubmit="submitQuery(event)">
+        <form class="pocQuery_form" onsubmit="submitQuery(event)">
             <h2>Point of Contact Query</h2>
             <div class="form-group">
                 <label for="productName">Product:</label>
@@ -83,7 +120,7 @@
 
 
     <!-- Points of Contact Table -->
-    <div style="padding: 20px;">
+    <div style="padding: 5px;">
         <table id="contactsTable">
             <thead>
                 <tr>
@@ -141,7 +178,7 @@
         }
 
         // Fetch contacts when the page loads
-        //window.onload = fetchContacts;
+        window.onload = fetchContacts;
     </script>
 
 

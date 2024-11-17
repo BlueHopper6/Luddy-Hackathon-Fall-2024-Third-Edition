@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insert Data</title>
+
+    <!--getting css-->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="navBar.css">
+    <link rel="stylesheet" href="form.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <ul>
+            <li><a href="index.html">Dashboard</a></li>
+            <li><a href="POC.html">POC</a></li>
+            <li><a class="activeNavLink" href="insert.html">Insert Data</a></li>
+            <li><a href="documentation.html">Documentation</a></li>
+            <li><a href="about.html">About</a></li>
+        </ul>
+    </nav>
+
+
+    <!-- Form to submit query -->
+    <div class="formContainerDiv">
+        <form id="pocInsert_form" class="pocQuery_form" onsubmit="">
+            <h2>Insert Point of Contact</h2>
+            <div class="form-group">
+                <label for="productName">Product:</label>
+                <input type="text" id="productName_input" name="productName" placeholder="Product">
+            </div>
+            <div class="form-group">
+                <label for="repoName">Repository:</label>
+                <input type="text" id="repoName_input" name="repoName" placeholder="Repository">
+            </div>
+            <div class="form-group">
+                <label for="firstName">First name:</label>
+                <input type="text" id="firstName_input" name="firstName" placeholder="First Name">
+            </div>
+            <div class="form-group">
+                <label for="lastName">Last name:</label>
+                <input type="text" id="lastName_input" name="lastName" placeholder="Last Name">
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="text" id="email_input" name="email" placeholder="Email">
+            </div>
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username_input" name="username" placeholder="Username">
+            </div>
+            <div class="form-group">
+                <label for="location">Location:</label>
+                <input type="text" id="location_input" name="location" placeholder="Location">
+            </div>
+            <div class="form-group">
+                <label for="role">Role:</label>
+                <input type="text" id="role_input" name="role" placeholder="Role">
+            </div>
+            <button type="submit" class="submitButton">Submit</button>
+        </form>
+    </div>
+
+
+    <script>
+        // Function to handle form submission
+        async function insertPointOfContact(event)
+        {
+            event.preventDefault(); // Prevent the default form submission behavior
+
+            // Collect form data
+            const product = document.getElementById('productName_input').value;
+            const repository = document.getElementById('repoName_input').value;
+            const firstName = document.getElementById('firstName_input').value;
+            const lastName = document.getElementById('lastName_input').value;
+            const email = document.getElementById('email_input').value;
+            const username = document.getElementById('username_input').value;
+            const location = document.getElementById('location_input').value;
+            const role = document.getElementById('role_input').value;
+
+            try
+            {
+                // Send data to the API endpoint
+                const response = await fetch('http://localhost:3000/api/insert', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                    poc_product: product,
+                    poc_repository: repository,
+                    poc_firstName: firstName,
+                    poc_lastName: lastName,
+                    poc_email: email,
+                    poc_username: username,
+                    poc_location: location,
+                    poc_role: role,
+                    }),
+                });
+                const result = await response.json();
+
+                if (response.ok)
+                {
+                    alert('Point of Contact added successfully!');
+                    document.getElementById('pocInsert_form').reset(); // Reset the form
+                }
+                else
+                {
+                    alert(`Error: ${result.error || 'Unable to insert data.'}`);
+                }
+            }
+            catch(error)
+            {
+                console.error('Error:', error);
+                alert('An error occurred while inserting data.');
+            }
+        }
+
+        // Attach the function to the form's submit event
+        document.getElementById('pocInsert_form').addEventListener('submit', insertPointOfContact);
+    </script>
+</body>
+</html>

@@ -1,5 +1,21 @@
+/*
 .formContainerDiv
 {
+    width: 100%;
+    max-width: 400px;
+    background: linear-gradient(145deg, #1e2631, #0a0f1c); /* Futuristic gradient *
+    border-radius: 12px;
+    padding: 20px;
+    margin: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8), 0 0 10px rgba(0, 188, 212, 0.6); /* Glowing effect *
+    border: 1px solid #00bcd4; /* Neon border *
+    position: absolute;
+    overflow: hidden;
+    top: 70px; /* Adjust based on your navbar height *
+}
+*/
+
+.formContainerDiv {
     width: 100%;
     max-width: 400px;
     background: linear-gradient(145deg, #1e2631, #0a0f1c); /* Futuristic gradient */
@@ -8,10 +24,12 @@
     margin: 20px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8), 0 0 10px rgba(0, 188, 212, 0.6); /* Glowing effect */
     border: 1px solid #00bcd4; /* Neon border */
-    position: relative;
-    overflow: hidden;
+    position: relative;  /* Change this from absolute to relative */
+    margin-top: 250px; /* Adjust space from the navbar */
 }
 
+
+/*
 .formContainerDiv::before
 {
     content: '';
@@ -21,10 +39,10 @@
     width: 100%;
     height: 100%;
     background: rgba(0, 188, 212, 0.1);
-    clip-path: polygon(0 0, 100% 0, 85% 100%, 15% 100%);
     z-index: 1;
     pointer-events: none;
 }
+    */
 
 .formContainerDiv h2
 {
@@ -46,6 +64,7 @@
 }
 
 /* Glowing Lines on Cards */
+/*
 .formContainerDiv::after
 {
     content: '';
@@ -59,9 +78,11 @@
     z-index: 0;
     pointer-events: none;
 }
+    */
 
+    
 /* Form Styling Inside Card */
-#pocQuery_form
+.pocQuery_form
 {
     display: flex;
     flex-direction: column;
@@ -69,7 +90,7 @@
     color: #c7cbd1;
 }
 
-#pocQuery_form h2
+.pocQuery_form h2
 {
     font-size: 20px;
     margin-bottom: 10px;
@@ -77,13 +98,13 @@
     color: #00bcd4;
 }
 
-#pocQuery_form .form-group label
+.pocQuery_form .form-group label
 {
     font-size: 12px;
     margin-bottom: 5px;
 }
 
-#pocQuery_form .form-group input
+.pocQuery_form .form-group input
 {
     padding: 10px;
     border: 1px solid #394355;
@@ -93,7 +114,7 @@
     font-size: 14px;
 }
 
-#pocQuery_form button
+.pocQuery_form button
 {
     padding: 10px;
     background-color: #00bcd4;
@@ -106,7 +127,7 @@
     transition: background-color 0.3s;
 }
 
-#pocQuery_form button:hover
+.pocQuery_form button:hover
 {
     background-color: #0099aa;
 }
