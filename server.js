@@ -33,7 +33,7 @@ app.get('/api/contacts', async (req, res) => {
             .from('points_of_contact')
             .select('*');
 
-        console.log(data);  // Log data to check the response from Supabase
+        //console.log(data);  // Log data to check the response from Supabase
 
         if (error)
         {

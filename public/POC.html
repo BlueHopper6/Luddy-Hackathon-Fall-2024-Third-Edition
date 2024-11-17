@@ -71,8 +71,8 @@
     {
         try
         {
-            //const response = await fetch('https://your-render-url.com/api/contacts');  // Update with your actual Render API URL http://localhost:3000/api/contacts
-            const response = await fetch('http://localhost:3000/api/contacts');
+            const response = await fetch('https://luddy-hackathon-fall-2024-third-edition.onrender.com/api/contacts');  // Update with your actual Render API URL http://localhost:3000/api/contacts
+            //const response = await fetch('http://localhost:3000/api/contacts');
             const contacts = await response.json();
 
             const tableBody = document.querySelector('#contactsTable tbody');
