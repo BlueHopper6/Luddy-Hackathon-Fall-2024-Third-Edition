@@ -9,6 +9,68 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="navBar.css">
 
+    <style>
+        /* General Styles */
+        body {
+        background: linear-gradient(145deg, #1e2631, #0a0f1c); /* Futuristic gradient */
+        color: #c7cbd1;
+        font-family: sans-serif;
+        margin: 0;
+        padding: 0;
+        }
+
+        .container {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 20px;
+        }
+
+        /* Header */
+        header {
+        text-align: center;
+        margin-bottom: 20px;
+        }
+
+
+        p {
+        font-size: 1em;
+        line-height: 1.5;
+        }
+
+        /* Sections */
+        section {
+        margin-bottom: 20px;
+        padding: 20px;
+        border-radius: 10px; /* Rounded corners */
+        background: rgba(0, 0, 0, 0.1); /* Slight transparent background */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+        }
+
+        h2 {
+        color: #00bcd4;
+        font-size: 1.5em;
+        margin-bottom: 10px;
+        }
+
+        /* Code block styling (adjust as needed) */
+        pre {
+        background-color: #282c34;
+        color: #ffffff;
+        padding: 10px;
+        border-radius: 5px;
+        font-family: monospace;
+        }
+
+        /* Footer */
+        footer {
+        text-align: center;
+        margin-top: 20px;
+        padding: 10px;
+        background: #1e2631; /* Match background gradient */
+        color: #c7cbd1;
+        }
+    </style>
+
 </head>
 <body>
     <!-- Navigation Bar -->
@@ -20,14 +82,95 @@
             <li><a class="activeNavLink" href="documentation.html">Documentation</a></li>
             <li><a href="about.html">About</a></li>
         </ul>
-        <!--
-        <div class="search-form">
-            <input type="text" id="product_input" placeholder="Enter Product Name">
-            <input type="text" id="repository_input" placeholder="Enter Repository Name (optional)">
-            <button id="searchBtn">Search</button>
-        </div>
-        <div id="results"></div>
-        -->
     </nav>
+        
+        <header>
+            <h1>API Documentation - Point of Contact for Collaboration Framework</h1>
+            <p>Overview of the API designed to query a point of contact for a given product or repository within SC 1701-D.</p>
+        </header>
+    
+        <section>
+            <h2>Introduction</h2>
+            <p>
+                Software Company 1701 Delta (SC 1701-D) has seen significant growth, making collaboration more challenging. Employees, like Veena, often find it difficult to identify the right person of contact for different products, especially when teams are located in different regions.
+            </p>
+            <p>
+                The Point of Contact API is designed to solve this problem, allowing employees to easily find a point of contact by querying a product name or repository name.
+            </p>
+        </section>
+    
+        <section>
+            <h2>Example Use Case</h2>
+            <p>
+                Veena is working on a feature that identifies security vulnerabilities. The team responsible for the security scan API is located in a different office, and Veena is struggling to find the right person to collaborate with. Using the Point of Contact API, Veena can easily find a person to contact by searching for the product name or repository name.
+            </p>
+        </section>
+    
+        <section>
+            <h2>API Design and Data Model</h2>
+            <p>The API was designed to query the Point of Contact for a given product or repository. The following tables were used in the database:</p>
+            <ul>
+                <li><strong>Products</strong>: Stores product information such as product name, repository, and related contact details.</li>
+                <li><strong>Contacts</strong>: Contains information about contacts such as first name, last name, email, chat username, location, and title/role.</li>
+            </ul>
+        </section>
+    
+        <section>
+            <h2>API Endpoints</h2>
+            <h3>GET /api/contacts</h3>
+            <p>
+                Query the Point of Contact based on either a product name or a repository name.
+            </p>
+            <h4>Query Parameters:</h4>
+            <ul>
+                <li><strong>product</strong> (optional): The name of the product.</li>
+                <li><strong>repository</strong> (optional): The name of the repository.</li>
+            </ul>
+    
+            <h4>Response:</h4>
+            <pre>
+            {
+                "poc_id": "uuid",
+                "poc_product": "Product A",
+                "poc_repository": "repo-a",
+                "poc_firstName": "John",
+                "poc_lastName": "Doe",
+                "poc_email": "john.d@example.com",
+                "poc_username": "john_d",
+                "poc_location": "City, State",
+                "poc_role": "Role"
+            }
+            </pre>
+    
+            <h4>Error Handling:</h4>
+            <p>
+                If no matching contact is found or if an invalid query parameter is provided, the API will return an error message such as:
+            </p>
+            <pre>
+            {
+                "error": "No contact found for the given product or repository."
+            }
+            </pre>
+        </section>
+    
+        <section>
+            <h2>Proof of Concept</h2>
+            <p>
+                A proof of concept (POC) for the API has been created. The POC handles the happy path of querying for a point of contact and also includes basic error handling for invalid inputs.
+            </p>
+            <p>
+                <a href="poc.html" target="_blank">Link to functional proof of concept</a>
+            </p>
+            <h4>Installation Instructions:</h4>
+            <pre>
+            1. Clone the repository.
+            2. Install dependencies with <code>npm install</code>.
+            3. Run the API with <code>npm start</code>.
+            </pre>
+        </section>
+    
+        <footer>
+            <p>For further questions or assistance, please contact the development team.</p>
+        </footer>
 </body>
 </html>
