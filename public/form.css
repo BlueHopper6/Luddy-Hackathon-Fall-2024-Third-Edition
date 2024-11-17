@@ -69,19 +69,22 @@
     color: #c7cbd1;
 }
 
-#pocQuery_form h2 {
+#pocQuery_form h2
+{
     font-size: 20px;
     margin-bottom: 10px;
     text-align: center;
     color: #00bcd4;
 }
 
-#pocQuery_form .form-group label {
+#pocQuery_form .form-group label
+{
     font-size: 12px;
     margin-bottom: 5px;
 }
 
-#pocQuery_form .form-group input {
+#pocQuery_form .form-group input
+{
     padding: 10px;
     border: 1px solid #394355;
     border-radius: 6px;
@@ -90,7 +93,8 @@
     font-size: 14px;
 }
 
-#pocQuery_form button {
+#pocQuery_form button
+{
     padding: 10px;
     background-color: #00bcd4;
     color: #ffffff;
@@ -102,6 +106,7 @@
     transition: background-color 0.3s;
 }
 
-#pocQuery_form button:hover {
+#pocQuery_form button:hover
+{
     background-color: #0099aa;
 }
