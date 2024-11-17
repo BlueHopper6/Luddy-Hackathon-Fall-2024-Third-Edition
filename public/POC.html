@@ -5,27 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Points of Contact</title>
 
-    <!--getting css-->
+    <!-- Link to CSS files -->
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="navBar.css">
 
+
     <style>
-        table
-        {
-          width: 100%;
-          border-collapse: collapse;
+        /* Additional inline table styling (optional if not in styles.css) */
+        #contactsTable {
+            width: 90%;
+            margin: 50px auto;
+            border-collapse: collapse;
+            color: #ffffff; /* White text for visibility */
         }
 
-        table, th, td
-        {
-          border: 1px solid black;
+        #contactsTable th, #contactsTable td {
+            border: 1px solid #ffffff; /* White border lines */
+            padding: 10px;
+            text-align: left;
+            font-size: 14px;
         }
-        th, td
-        {
-          padding: 10px;
-          text-align: left;
+
+        #contactsTable th {
+            background-color: #1e2631; /* Slightly darker background for header */
+            font-weight: bold;
+            text-transform: uppercase;
         }
-      </style>
+
+        #contactsTable tr:nth-child(even) {
+            background-color: #151a25; /* Alternate row background for contrast */
+        }
+
+        #contactsTable tr:hover {
+            background-color: #394355; /* Highlight row on hover */
+        }
+    </style>
 </head>
 <body>
     <!-- Navigation Bar -->
@@ -36,43 +50,39 @@
             <li><a href="documentation.html">Documentation</a></li>
             <li><a href="about.html">About</a></li>
         </ul>
-        <!--
-        <div class="search-form">
-            <input type="text" id="product_input" placeholder="Enter Product Name">
-            <input type="text" id="repository_input" placeholder="Enter Repository Name (optional)">
-            <button id="searchBtn">Search</button>
-        </div>
-        <div id="results"></div>
-        -->
     </nav>
 
-    <h1>Points of Contact</h1>
-    <table id="contactsTable">
-        <thead>
-            <tr>
-            <th>Product Name</th>
-            <th>Repository Name</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Email</th>
-            <th>Username</th>
-            <th>Location</th>
-            <th>Role</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Table rows will be populated here -->
-        </tbody>
-    </table>
+    <!-- Page Title -->
+    <div style="margin-top: -100px; text-align: center;">
+        <h1>Points of Contact</h1>
+    </div>
+
+    <!-- Points of Contact Table -->
+    <div style="padding: 20px;">
+        <table id="contactsTable">
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Repository Name</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Username</th>
+                    <th>Location</th>
+                    <th>Role</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Table rows will be populated here -->
+            </tbody>
+        </table>
+    </div>
 
     <script>
         // Function to fetch contacts from API and display in the table
-        async function fetchContacts()
-        {
-            try
-            {
-                const response = await fetch('https://luddy-hackathon-fall-2024-third-edition.onrender.com/api/contacts');  // Update with your actual Render API URL http://localhost:3000/api/contacts
-                //const response = await fetch('http://localhost:3000/api/contacts');
+        async function fetchContacts() {
+            try {
+                const response = await fetch('http://localhost:3000/api/contacts'); // Update with your actual API URL
                 const contacts = await response.json();
 
                 const tableBody = document.querySelector('#contactsTable tbody');
@@ -82,50 +92,24 @@
                 contacts.forEach(contact => {
                     const row = document.createElement('tr');
 
-                    // Create table cells for each contact attribute
-                    const productCell = document.createElement('td');
-                    productCell.textContent = contact.poc_product;  // Adjust with your column names
-                    row.appendChild(productCell);
-
-                    const repoCell = document.createElement('td');
-                    repoCell.textContent = contact.poc_repository;  // Adjust with your column names
-                    row.appendChild(repoCell);
-
-                    const firstNameCell = document.createElement('td');
-                    firstNameCell.textContent = contact.poc_firstName;  // Adjust with your column names
-                    row.appendChild(firstNameCell);
-
-                    const lastNameCell = document.createElement('td');
-                    lastNameCell.textContent = contact.poc_lastName;  // Adjust with your column names
-                    row.appendChild(lastNameCell);
-
-                    const emailCell = document.createElement('td');
-                    emailCell.textContent = contact.poc_email;  // Adjust with your column names
-                    row.appendChild(emailCell);
-
-                    const usernameCell = document.createElement('td');
-                    usernameCell.textContent = contact.poc_username;  // Adjust with your column names
-                    row.appendChild(usernameCell);
-
-                    const locationCell = document.createElement('td');
-                    locationCell.textContent = contact.poc_location;  // Adjust with your column names
-                    row.appendChild(locationCell);
-                    
-                    const roleCell = document.createElement('td');
-                    roleCell.textContent = contact.poc_role;  // Adjust with your column names
-                    row.appendChild(roleCell);
-
-                    // Append the row to the table body
+                    // Populate table cells for each contact attribute
+                    row.innerHTML = `
+                        <td>${contact.poc_product}</td>
+                        <td>${contact.poc_repository}</td>
+                        <td>${contact.poc_firstName}</td>
+                        <td>${contact.poc_lastName}</td>
+                        <td>${contact.poc_email}</td>
+                        <td>${contact.poc_username}</td>
+                        <td>${contact.poc_location}</td>
+                        <td>${contact.poc_role}</td>
+                    `;
                     tableBody.appendChild(row);
-                    console.log(contacts);
-
                 });
-            }
-            catch(error)
-            {
+            } catch (error) {
                 console.error('Error fetching contacts:', error);
             }
         }
+
         // Fetch contacts when the page loads
         window.onload = fetchContacts;
     </script>

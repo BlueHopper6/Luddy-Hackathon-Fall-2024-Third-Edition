@@ -1,9 +1,26 @@
+/* Load Orbitron Font */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap');
+
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body Styling */
+body {
+    font-family: 'Orbitron', sans-serif; /* Sleek futuristic font */
+    background-color: #0a0f1c; /* Dark background */
+    color: #ffffff;
+}
+
 /* Navigation Bar */
 .navbar
 {
     width: 100%;
     display: flex;
-    justify-content: space-between; /* Space out the nav links and search form */
+    justify-content: space-between; /* Space out nav links and search form */
     padding: 10px 20px;
     background-color: #151a25; /* Dark background */
     border-bottom: 1px solid #394355;
@@ -21,11 +38,126 @@
     text-decoration: none;
     color: #c7cbd1;
     font-size: 14px;
+    font-weight: 600; /* Bold for emphasis */
     text-transform: uppercase;
-    transition: color 0.2s ease;
+    position: relative;
+    display: inline-block;
+    transition: color 0.3s ease;
 }
 
-.navbar ul li a:hover, .navbar ul li a.activeNavLink
+.navbar ul li a:hover, .navbar ul li a.active
 {
     color: #00bcd4; /* Subtle accent color */
+}
+
+/* Pulsating Underline Animation */
+.navbar ul li a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #00bcd4, #0099aa);
+    box-shadow: 0 0 8px rgba(0, 188, 212, 0.8);
+    border-radius: 2px;
+    transition: width 0.4s ease;
+}
+
+.navbar ul li a:hover::after {
+    width: 100%;
+}
+
+/* Pulse Animation for Links */
+/*
+.navbar ul li a:hover::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(0, 188, 212, 0.4);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    animation: pulse 0.6s ease-out infinite;
+}
+
+@keyframes pulse {
+    0% {
+        width: 0;
+        height: 0;
+        opacity: 0.8;
+    }
+    100% {
+        width: 200%;
+        height: 200%;
+        opacity: 0;
+    }
+}
+*/
+
+/* Buttons */
+button
+{
+    font-family: 'Orbitron', sans-serif; /* Match the futuristic font */
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: #ffffff;
+    background-color: #00bcd4;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 20px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden; /* For ripple effect */
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0099aa;
+    color: #e0f7fa;
+}
+
+/* Pulsating Underline Animation for Buttons */
+button::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #00bcd4, #0099aa);
+    box-shadow: 0 0 8px rgba(0, 188, 212, 0.8);
+    border-radius: 2px;
+    transition: width 0.4s ease;
+}
+
+button:hover::after {
+    width: 100%;
+}
+
+/* Ripple Effect for Buttons */
+button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    transition: width 0.4s ease, height 0.4s ease, opacity 0.8s ease;
+    opacity: 0;
+}
+
+button:active::before {
+    width: 200%;
+    height: 200%;
+    opacity: 1;
+    transition: width 0.2s ease, height 0.2s ease, opacity 0.4s ease;
 }
